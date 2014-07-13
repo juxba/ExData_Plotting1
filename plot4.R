@@ -17,11 +17,11 @@ DF <- DF[, 3:9]     # Eliminate Date and Time columns
 DF <- data.frame(Dates = st, DF)    # add Dates column to DF
 #
 # Extract subset of DT for plotting
-limits <- c("2007-01-31", "2007-02-03")
+limits <- c("2007-02-01", "2007-02-02")
 limits <- as.Date(strptime(limits, format("%Y-%m-%d")))
 DF = subset(DF,
-            (as.Date(DF$Dates) > limits[1])
-            & (as.Date(DF$Dates) < limits[2])
+            (as.Date(DF$Dates) == limits[1])
+            | (as.Date(DF$Dates) == limits[2])
 )
 #
 png("plot4.png")
