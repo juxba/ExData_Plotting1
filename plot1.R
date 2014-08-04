@@ -10,21 +10,11 @@ DF <- read.csv2("household_power_consumption.txt",
                 colClasses=c(rep("character", 2), rep("numeric", 7)),
                 na.strings="?", dec=".", stringsAsFactors=FALSE)
 #
-st <- strptime(paste(DF$Date, DF$Time), format("%d/%m/%Y %H:%M:%S"))
-# > class(st)
-# [1] "POSIXlt" "POSIXt"
-DF <- DF[, 3:9]     # Eliminate Date and Time columns
-DF <- data.frame(Dates = st, DF)    # add Dates column to DF
+# Extract plotting subset
+DF = subset(DF, Date=='1/2/2007' | Date =='2/2/2007')
 #
-# Extract subset of DT for plotting
-DF = subset(DF,
-            (as.Date(DF$Dates) == as.Date("2007-02-01"))
-            | (as.Date(DF$Dates) == as.Date("2007-02-02"))
-)
-#
-png("plot1.png")
+#png("plot1.png")
 par(mar = c(6,6,4,2))
 hist(DF$Global_active_power, breaks=15, col="red",
-     xlab="Global active power (kilowatts)", main = "")
-title(main="Global active power")
-dev.off()
+     xlab="Global active power (kilowatts)", main = "Global active power")
+#dev.off()

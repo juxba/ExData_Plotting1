@@ -10,25 +10,18 @@ DF <- read.csv2("household_power_consumption.txt",
                 colClasses=c(rep("character", 2), rep("numeric", 7)),
                 na.strings="?", dec=".", stringsAsFactors=FALSE)
 #
-st <- strptime(paste(DF$Date, DF$Time), format("%d/%m/%Y %H:%M:%S"))
-# > class(st)
-# [1] "POSIXlt" "POSIXt"
-DF <- DF[, 3:9]     # Eliminate Date and Time columns
-DF <- data.frame(Dates = st, DF)    # add Dates column to DF
+# Extract plotting subset
+sDF = subset(DF, Date == '1/2/2007' | Date == '2/2/2007')
 #
-# Extract subset of DT for plotting
-DF = subset(DF,
-            (as.Date(DF$Dates) == as.Date("2007-02-01"))
-            | (as.Date(DF$Dates) == as.Date("2007-02-02"))
-)
+sDF$Date <- strptime(paste(sDF$Date, sDF$Time), format("%d/%m/%Y %H:%M:%S"))
+sDF$Time <- NULL
 #
-png("plot3.png")
-with(DF,
-    {par(mar = c(4,6,4,2))
-     plot(Sub_metering_1 ~ Dates, type="l", ylab="Energy sub metering", xlab="")
-     points(Dates, Sub_metering_2, type="l", col="red")
-     points(Dates, Sub_metering_3, type="l", col="blue")
-    })
-    legend("topright", lty=1, col = c("black", "red", "blue"),
+#
+#png("plot3.png")
+par(mar = c(4,6,4,2))
+plot(sDF$Date, sDF$Sub_metering_1, type="l", ylab="Energy sub metering", xaxt="n")
+lines(sDF$Date, sDF$Sub_metering_2, type="l", col="red")
+lines(sDF$Date, sDF$Sub_metering_3, type="l", col="blue")
+legend("topright", lty=1, col = c("black", "red", "blue"),
            legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-dev.off()
+#dev.off()
