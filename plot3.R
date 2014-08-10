@@ -19,7 +19,7 @@ sDF$Time <- NULL
 #
 #png("plot3.png")
 par(mar = c(4,6,4,2))
-plot(sDF$Date, sDF$Sub_metering_1, type="l", ylab="Energy sub metering", xaxt="n")
+plot(sDF$Date, sDF$Sub_metering_1, type="l", ylab="Energy sub metering", xlab="")
 lines(sDF$Date, sDF$Sub_metering_2, type="l", col="red")
 lines(sDF$Date, sDF$Sub_metering_3, type="l", col="blue")
 legend("topright", lty=1, col = c("black", "red", "blue"),
