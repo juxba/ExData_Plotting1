@@ -11,10 +11,10 @@ DF <- read.csv2("household_power_consumption.txt",
                 na.strings="?", dec=".", stringsAsFactors=FALSE)
 #
 # Extract plotting subset
-DF = subset(DF, Date=='1/2/2007' | Date =='2/2/2007')
+sDF = subset(DF, Date == '1/2/2007' | Date == '2/2/2007')
 #
 #png("plot1.png")
 par(mar = c(6,6,4,2))
-hist(DF$Global_active_power, breaks=15, col="red",
+hist(sDF$Global_active_power, breaks=15, col="red",
      xlab="Global active power (kilowatts)", main = "Global active power")
 #dev.off()
